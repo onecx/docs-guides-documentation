@@ -1,0 +1,3 @@
+* Documentation
+** Setup
+*** xref:setup/repository.adoc []
