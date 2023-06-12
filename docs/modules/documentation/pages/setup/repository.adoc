@@ -14,10 +14,10 @@ docs
 -- <postfix of you repo name e.g. bff or svc>
 --- pages //in this folder will be the content later
 --- nav.adoc
-- antora.yaml
+- antora.yml
 ```
 
-* The `antora.yaml` should contain the following:
+* The `antora.yml` should contain the following:
 ```
 name: <name of the product e.g. document-management>
 title: <tile of the product e.g. Document Management>
@@ -55,7 +55,7 @@ jobs:
 
 To integrate the documentation in to the overall documentation the repository has to be added to the main repository of the documentation: https://github.com/onecx/docs. The repository has to be added to the list of sources.
 
-To integrate the documentation into the menu of the product the `nav.adoc` has to be registered in the repository with the name of you product. For document-management-svc this would be document-management. The registering is done by adding the following to the nav section in the `antora.yaml` in this repository:
+To integrate the documentation into the menu of the product the `nav.adoc` has to be registered in the repository with the name of you product. For document-management-svc this would be document-management. The registering is done by adding the following to the nav section in the `antora.yml` in this repository:
 
 ```
 - modules/<name of the module folder e.g. svc>/nav.adoc
