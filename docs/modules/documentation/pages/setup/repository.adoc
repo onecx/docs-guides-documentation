@@ -30,8 +30,8 @@ version: latest
 ```
 * <part of the product e.g. BFF or Service or UI>
 ** <name of the chapter>
-*** xref:<name of the chapter folder>/<filename of 1. sub-chapter> []
-*** xref:<name of the chapter folder>/<filename of 2. sub-chapter> []
+*** xref:<name of the chapter folder>/<filename of 1. sub-chapter>[]
+*** xref:<name of the chapter folder>/<filename of 2. sub-chapter>[]
 ```
 
 * The `main.yml` in the `.github` folder should contain the following to make sure the overall documentation is updated when the documentation in the repository changes:

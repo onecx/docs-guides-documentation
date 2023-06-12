@@ -36,10 +36,10 @@ nav:
 
 * The `nav.adoc` contains the menu structure of the documentation
 ```
-* xref:general:index.adoc [General]
+* xref:general:index.adoc[General]
 ** <name of the chapter>
-*** xref:<name of the chapter folder>/<filename of 1. sub-chapter> []
-*** xref:<name of the chapter folder>/<filename of 2. sub-chapter> []
+*** xref:<name of the chapter folder>/<filename of 1. sub-chapter>[]
+*** xref:<name of the chapter folder>/<filename of 2. sub-chapter>[]
 ```
 
 * The `index.adoc` file should contain the welcome page of the product, containing the following information:
