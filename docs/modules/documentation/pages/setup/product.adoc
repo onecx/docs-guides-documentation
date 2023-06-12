@@ -4,7 +4,7 @@ This chapter gives guidance on how to add the documentation of a new product to 
 
 Every product is structured in different repositories. The names of the repositories are following the schema `<name of the product>\<-optional postfix>` e.g. `document-management` and `document-management-bff`. The repository without postfix contains the general documentation of the product and the repositories with postfix are containing the documentation of the parts of the product e.g. the BFF.
 
-For the structure of the repositories with postfix see: xref:repository.adoc[Integrating new repository]
+For the structure of the repositories with postfix see: xref:setup/repository.adoc[Integrating new repository]
 
 For the repository without postfix the guidelines below have to be followed:
 
@@ -36,10 +36,10 @@ nav:
 
 * The `nav.adoc` contains the menu structure of the documentation
 ```
-* xref:general:index.adoc [General]
+* xref:general:index.adoc[General]
 ** <name of the chapter>
-*** xref:<name of the chapter folder>/<filename of 1. sub-chapter> []
-*** xref:<name of the chapter folder>/<filename of 2. sub-chapter> []
+*** xref:<name of the chapter folder>/<filename of 1. sub-chapter>[]
+*** xref:<name of the chapter folder>/<filename of 2. sub-chapter>[]
 ```
 
 * The `index.adoc` file should contain the welcome page of the product, containing the following information:

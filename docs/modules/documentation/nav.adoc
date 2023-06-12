@@ -1,4 +1,4 @@
 * Documentation
 ** Setup
-*** xref:setup/product.adoc []
-*** xref:setup/repository.adoc []
+*** xref:setup/product.adoc[]
+*** xref:setup/repository.adoc[]
