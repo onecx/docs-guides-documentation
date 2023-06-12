@@ -1,0 +1,61 @@
+= Integrating new repository
+
+This chapter gives guidance on how to add documentation for a repository to the documentation of an existing product.
+
+The documentation of a repository is always located in the folder `docs`. To integrate the documentation of a repository into the overall documentation without issues the guidelines below have to be followed:
+
+* The repository should have the following file and folder structure:
+```
+.github //including the dot
+- workflows
+-- main.yml
+docs
+- modules
+-- <postfix of you repo name e.g. bff or svc>
+--- nav.adoc
+- antora.yaml
+```
+
+* The `antora.yaml` should contain the following:
+```
+name: <name of the product e.g. document-management>
+title: <tile of the product e.g. Document Management>
+version: latest
+```
+
+* Inside the module folder (the folder inside the `modules` folder) there should be sub-folders for the chapters of the documentation.
+
+* The `nav.adoc` contains the menu structure of the documentation
+```
+* <part of the product e.g. BFF or Service or UI>
+** <name of the chapter>
+*** xref:<name of the chapter folder>/<filename of 1. sub-chapter> []
+*** xref:<name of the chapter folder>/<filename of 2. sub-chapter> []
+```
+
+* The `main.yml` in the `.github` folder should contain the following to make sure the overall documentation is updated when the documentation in the repository changes:
+```
+name: CI
+on: 
+  push: 
+    branches: [ main ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger website update
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.CI_PAT }}
+          repository: onecx/docs
+          event-type: dispatch-build-website
+```
+
+To integrate the documentation in to the overall documentation the repository has to be added to the main repository of the documentation: https://github.com/onecx/docs. The repository has to be added to the list of sources.
+
+To integrate the documentation into the menu of the product the `nav.adoc` has to be registered in the repository with the name of you product. For document-management-svc this would be document-management. The registering is done by adding the following to the nav section in the `antora.yaml` in this repository:
+
+```
+- modules/<name of the module folder e.g. svc>/nav.adoc
+```

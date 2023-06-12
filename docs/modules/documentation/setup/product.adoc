@@ -1,0 +1,67 @@
+= Create new product
+
+This chapter gives guidance on how to add the documentation of a new product to the overall documentation.
+
+Every product is structured in different repositories. The names of the repositories are following the schema `<name of the product>\<-optional postfix>` e.g. `document-management` and `document-management-bff`. The repository without postfix contains the general documentation of the product and the repositories with postfix are containing the documentation of the parts of the product e.g. the BFF.
+
+For the structure of the repositories with postfix see: xref:repository.adoc[Integrating new repository]
+
+For the repository without postfix the guidelines below have to be followed:
+
+*  The repository should have the following file and folder structure:
+```
+.github //including the dot
+- workflows
+-- main.yml
+docs
+- modules
+-- general
+--- index.adoc
+--- nav.adoc
+- antora.yaml
+```
+
+* The `antora.yaml` should contain the following:
+```
+name: <name of the product e.g. document-management>
+title: <tile of the product e.g. Document Management>
+version: latest
+start_page: general:index.adoc
+nav:
+- modules/general/nav.adoc
+```
+
+* Inside the `general` folder there should be sub-folders for the chapters of the documentation.
+
+* The `nav.adoc` contains the menu structure of the documentation
+```
+* xref:general:index.adoc [General]
+** <name of the chapter>
+*** xref:<name of the chapter folder>/<filename of 1. sub-chapter> []
+*** xref:<name of the chapter folder>/<filename of 2. sub-chapter> []
+```
+
+* The `index.adoc` file should contain the welcome page of the product, containing the following information:
+** what is the product used for?
+** where can the user find additional resources about the product?
+** images explaining the context of the product
+** ...
+
+* The `main.yml` in the `.github` folder should contain the following to make sure the overall documentation is updated when the documentation in the repository changes:
+```
+name: CI
+on: 
+  push: 
+    branches: [ main ]
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger website update
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.CI_PAT }}
+          repository: onecx/docs
+          event-type: dispatch-build-website
+```
