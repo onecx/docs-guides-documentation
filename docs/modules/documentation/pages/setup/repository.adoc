@@ -12,6 +12,7 @@ The documentation of a repository is always located in the folder `docs`. To int
 docs
 - modules
 -- <postfix of you repo name e.g. bff or svc>
+--- pages //in this folder will be the content later
 --- nav.adoc
 - antora.yaml
 ```
@@ -23,7 +24,7 @@ title: <tile of the product e.g. Document Management>
 version: latest
 ```
 
-* Inside the module folder (the folder inside the `modules` folder) there should be sub-folders for the chapters of the documentation.
+* Inside the `pages` folder of the module there should be sub-folders for the chapters of the documentation. Even if the sub-chapter currently only has one file.
 
 * The `nav.adoc` contains the menu structure of the documentation
 ```

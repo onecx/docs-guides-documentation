@@ -16,7 +16,8 @@ For the repository without postfix the guidelines below have to be followed:
 docs
 - modules
 -- general
---- index.adoc
+--- pages
+---- index.adoc
 --- nav.adoc
 - antora.yaml
 ```
