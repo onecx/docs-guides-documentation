@@ -19,10 +19,10 @@ docs
 --- pages
 ---- index.adoc
 --- nav.adoc
-- antora.yaml
+- antora.yml
 ```
 
-* The `antora.yaml` should contain the following:
+* The `antora.yml` should contain the following:
 ```
 name: <name of the product e.g. document-management>
 title: <tile of the product e.g. Document Management>
