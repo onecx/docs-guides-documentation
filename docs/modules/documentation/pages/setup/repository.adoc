@@ -1,3 +1,4 @@
+:imagesdir: ../images
 = Integrating new repository
 
 This chapter gives guidance on how to add documentation for a repository to the documentation of an existing product.
@@ -60,3 +61,5 @@ To integrate the documentation into the menu of the product the `nav.adoc` has t
 ```
 - modules/<name of the module folder e.g. svc>/nav.adoc
 ```
+
+include::partial$good-practice.adoc[]

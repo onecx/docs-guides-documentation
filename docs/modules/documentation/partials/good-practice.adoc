@@ -1,0 +1,6 @@
+Is is recommended to follow the following good practices while creating documents:
+
+* Overwrite the images directory for AsciiDoc readers to align with Antora. This change is required on *every document*:
+```
+:imagesdir: ../images
+```
