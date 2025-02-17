@@ -1,3 +1,4 @@
+:imagesdir: ../images
 = Create new product
 
 This chapter gives guidance on how to add the documentation of a new product to the overall documentation.
@@ -66,3 +67,5 @@ jobs:
           repository: onecx/docs
           event-type: dispatch-build-website
 ```
+
+include::partial$good-practice.adoc[]

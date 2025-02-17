@@ -1,0 +1,16 @@
+:imagesdir: ../images
+= Working with local copies
+
+This chapter gives guidance on how to work with local copies of documentation repositories.
+
+== Prepare main repository
+To start with reviewing changes, make sure to clone the main repository of the documentation https://github.com/onecx/docs and install packages using `npm i`.
+
+== Replace remote repositories
+In the documentation main repository, a list of sources will be present with already defined documentations. All of the are referencing a remote repository via the *url* property. In order to use local changes, overwrite the remote url with a `local path of the selected documentation`. This path should be global or relative to the directory of the main documentation local copy.
+
+== Build
+To build the documentation run `npx antora antora-playbook.yml`. The command will report any warning or errors during site building. Utilize them to identify issues prior to accessing the generated pages.
+
+== Access
+Successful site generation will result in a build directory in the main documentation root. This directory contains all pages required to display the whole documentation. Access any page by opening desired index.html file or open `build/site/index.html` file to access the main page of the documentation use navigation.

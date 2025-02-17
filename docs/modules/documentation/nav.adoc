@@ -2,3 +2,6 @@
 ** Setup
 *** xref:setup/product.adoc[]
 *** xref:setup/repository.adoc[]
+*** xref:setup/local.adoc[]
+** Guides
+*** xref:guides/reference.adoc[]
