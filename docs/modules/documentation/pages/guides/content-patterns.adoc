@@ -1,0 +1,79 @@
+:imagesdir: ../images
+
+= Content patterns
+
+This chapter documents the content patterns this documentation effort establishes. The goal is that future documentation additions follow the same structure instead of drifting back into duplication and re-fragmentation.
+
+Every pattern below is illustrated against the pages this effort actually published in the `docs-guides-ui` repository, so the rules can be read against real pages rather than in the abstract. If you are adding a page to a OneCX UI documentation repository, apply the relevant pattern before you create it.
+
+== Required/Recommended tier-classification test
+
+Setup topics are classified into tiers, not listed as one flat list. A developer integrating an app must be able to tell at a glance which steps are load-bearing, which cause visibly incorrect behavior if skipped, and which are purely opt-in. Use this test to decide which tier a setup topic belongs in:
+
+* *Required* — the application cannot function in the shell at all without it. Skipping it produces a broken integration (the app fails to load, cannot route, or cannot authenticate).
+* *Recommended* — the application runs, but it behaves visibly incorrectly without it: wrong styles, missing translations, or broken navigation.
+* *Features* (the former "Optional") — the application is unaffected in correctness if it skips the topic. It is adopted purely on its own merits.
+
+A topic is placed in exactly one tier. When a topic does not fit *Required* or *Recommended* under the test, it belongs in the xref:#features-tier[Features tier] rather than being left unclassified.
+
+In the worked example, `docs-guides-ui` applies the test directly:
+
+* `setup/required/` holds the load-bearing steps an app must complete to function in the shell at all: Platform & Package Compatibility Requirements, Expose a Remote Module, Configure Remote Package Sharing, and Configure Authentication.
+* `setup/recommended/` holds the steps an app should complete to behave correctly: Expose Component Styles & Apply Theming, Expose & Configure Library Assets, and Adapt Routing.
+* Opt-in topics that would once have sat in an "Optional Setup" list now live under `features/`, where the xref:#features-tier[Features tier] explains why.
+
+[#features-tier]
+== Features documentation tier
+
+Some platform topics are opt-in and carry no correctness impact if skipped. These topics do not belong in *Required* or *Recommended* (which are reserved for steps the app must or should complete to run correctly), but they still need a home in the navigation.
+
+The *Features* documentation tier is that home. It is a nav-level sibling of *Setup* and *Concepts*, so a reader sees it as a peer rather than a sub-topic of setup. Each Features page is a standalone, independent entry point: adopting one feature does not require adopting another, and the pages are not ordered into a sequence.
+
+This tier replaces the earlier "Optional Setup" concept. A topic that an app *may* adopt — with no correctness impact if skipped — is a Feature, not an optional setup step.
+
+In the worked example, `docs-guides-ui` publishes `features/` as a first-class section alongside `setup/` and `concepts/`. `features/index.adoc` introduces the section and links each independent page (Multi-language, Display Messages, Permissions Handling, PrimeNG Theming Customization, Source Maps, Environment Variables, and the NgRx State Management guide), and the section appears in `nav.adoc` at the same level as *Required Setup*, *Recommended Setup*, and *Concepts*.
+
+== One-ticket-per-page granularity and paired cross-links
+
+Concepts and Features are written one page per topic, not as a single merged overview. Each page is an independent unit of work (one ticket per page), so pages can be authored, reviewed, and published independently and in any order.
+
+Concept pages are *short public overviews*. A concept page explains the core idea concisely and links out to the fuller internal developer documentation for the depth — it does not restate that depth. The page shape depends on the topic:
+
+* *Technology-agnostic* — a single page when the concept is identical across frameworks (for example Theming, Module Federation, and Assets).
+* *Hybrid* — an agnostic core with per-framework subsections when the API diverges by framework (for example Routing and Remote Components, each with Angular and React sub-pages).
+* *Technology-only* — a single-framework page when the concept only applies to one framework, with the other framework's gap noted explicitly rather than left silent or written speculatively (for example State Management, which is Angular-only).
+
+When two of these pages reference each other, they follow the *paired cross-linking convention*. Each page in the pair carries a link to the other so a reader can move between them from either direction. The link is added to a page once its counterpart exists, so both directions resolve regardless of which page was authored first. In the worked example, the *Translations* concept page links to the *Multi-language* Feature page ("fallback-language behavior when a translation key cannot be resolved"), and the *Multi-language* Feature page links back to the *Translations* concept ("the underlying translation-lookup mechanism this feature falls back on").
+
+== Consolidated hubs
+
+[#hub-pattern]
+Some topics cut across repositories: troubleshooting and testing are the clearest examples. The pattern is that such a topic is hosted once, as a single canonical section, and new repository-specific content *extends* the existing canonical section rather than spawning a fresh per-repo page.
+
+This keeps one authoritative place per cross-cutting topic and prevents the same topic from fragmenting again across repositories — the exact failure this effort started from (two overlapping troubleshooting pages in different repositories, with heavy content overlap and stale links).
+
+If you are adding troubleshooting or testing content for a new repository, do not create a new per-repo troubleshooting or testing page. Read this subsection first, then extend the existing canonical section so the content lives in one place.
+
+== Troubleshooting pages pattern
+
+A troubleshooting section follows the *multiple pages, one ticket, one index* pattern. Instead of a single long page, the section is a set of short, focused pages — one per troubleshooting stage or category — brought together by a single index page that links them all.
+
+The index page is the entry point. It introduces the section, names the pages, and links each one. Each page is a standalone entry point that covers one stage and links to the canonical guides for the details. Because the section is one ticket producing multiple pages, the pages ship together and the index is always in sync with the set.
+
+In the worked example, `docs-guides-ui` publishes `troubleshooting/index.adoc` linking six stage pages: Preparation, Application Setup, Shell Compatibility, General Issues, Specific Issues, and TSConfig Paths. The index preserves the pre-split single-page URI through `:page-aliases:` so existing links to the old page keep resolving.
+
+== Per-repo cleanup-ticket pattern
+
+Cleanup of absorbed or retired pages is scoped *one ticket per affected repository*, not one ticket per topic. A single leaf ticket may only touch one repository, so a per-topic ticket that would span several repositories cannot be implemented as a unit.
+
+Under this pattern, each repository that needs cleanup gets its own ticket, and that ticket retires the absorbed pages in that repository and points any retired URI at its new canonical location (typically via `:page-aliases:` redirects), leaving no dangling links. This also means a page is retired only once its replacement exists, so the redirect always resolves.
+
+In the worked example, the effort produced separate cleanup tickets — one for `docs-guides-ui` (retire its absorbed pages, consolidating the scope of the earlier per-topic cleanup), one for `docs`, one for `docs-guides`, and one for `onecx-portal-ui-libs`.
+
+== Flat-link entrypoint pattern
+
+An entrypoint page gives a journey a single front door without imposing a rigid onboarding flow. The pattern is a *flat list* of links to the independent pages a reader needs, not a numbered, sequential procedure.
+
+The reader is told up front that the pages are independent entry points and that they should follow only the ones they need, in any order. This serves a reader who is integrating an existing app and needs only a subset of the setup, while still leaving a clear path for someone building a new app from scratch (who can work the setup tiers in order).
+
+In the worked example, the *Working on OneCX UIs* entrypoint page in `docs-guides-ui` is a flat list of links — Required Setup, Recommended Setup, Features, Concepts, Troubleshooting, Migrating an Existing App, React, and Contribution & Testing — with a sentence making clear the links are independent entry points rather than a fixed sequence.

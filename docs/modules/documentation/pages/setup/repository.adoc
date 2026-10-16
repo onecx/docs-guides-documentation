@@ -62,4 +62,6 @@ To integrate the documentation into the menu of the product the `nav.adoc` has t
 - modules/<name of the module folder e.g. svc>/nav.adoc
 ```
 
+TIP: Before you create a per-repository troubleshooting or testing page, review the xref:guides/content-patterns.adoc#hub-pattern[consolidated-hubs pattern in the content-patterns guide]. Cross-cutting topics such as troubleshooting and testing are hosted once as a canonical section; new repository-specific content extends that section instead of spawning a fresh per-repo page.
+
 include::partial$good-practice.adoc[]
